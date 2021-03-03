@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Adam's Calculator</title>
+</head>
+
+<body >
+
+    <div class="container-fluid ">
+        <h1 class="text-center">Adam's Calculator</h1>
+        <div id="screen">
+            <div data-previous-operand id="result" class="text-end">
+            </div>
+            <div data-current-operand id="display" class="text-end">
+            </div>
+        </div>
+        <div id="wrappers">
+
+            <div class="box1">
+                <button class="btn fs-1 btn-danger" id="clear" data-all-clear> AC </button>
+            </div>
+            <div class="box2">
+                <button class="btn fs-1 btn-warning" id="divide" data-operation> ÷ </button>
+            </div>
+            <div class="box3">
+                <button class="btn fs-1 btn-warning" id="multiply" data-operation> * </button>
+            </div>
+            <div class="box4">
+                <button class="btn fs-1 btn-secondary" id="one"data-number> 1 </button>
+            </div>
+            <div class="box5">
+                <button class="btn fs-1 btn-secondary" id="two" data-number> 2 </button>
+            </div>
+            <div class="box6">
+                <button class="btn fs-1 btn-secondary" id="three" data-number> 3 </button>
+            </div>
+            <div class="box7">
+                <button class="btn fs-1 btn-warning" id="subtract" data-operation> - </button>
+            </div>
+            <div class="box8">
+                <button class="btn fs-1 btn-secondary" id="four" data-number> 4 </button>
+            </div>
+            <div class="box9">
+                <button class="btn fs-1 btn-secondary" id="five"  data-number> 5 </button>
+            </div>
+            <div class="box10">
+                <button class="btn fs-1 btn-secondary" id="six" data-number> 6 </button>
+            </div>
+            <div class="box11">
+                <button class="btn fs-1 btn-warning" id="add" data-operation> + </button>
+            </div>
+            <div class="box12">
+                <button class="btn fs-1 btn-secondary" id="seven" data-number> 7 </button>
+            </div>
+            <div class="box13">
+                <button class="btn fs-1 btn-secondary" id="eight" data-number> 8 </button>
+            </div>
+            <div class="box14">
+                <button class="btn fs-1 btn-secondary" id="nine" data-number> 9 </button>
+            </div>
+            <div class="box15">
+                <button class="btn fs-1 btn-primary" id="equals" data-equals-2>  = </button>
+            </div>
+            <div class="box16">
+                <button class="btn fs-1 btn-secondary" id="zero" data-number> 0 </button>
+            </div>
+            <div class="box17">
+                <button class="btn fs-1 btn-secondary" id="decimal" data-number> . </button>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <!-- <script>
+        var x = 0.0;
+        var operator = "";
+        let result = 0;
+        let display = document.getElementById("display");
+        let displayresult = document.getElementById("result");
+        function updateDisplay(input) {
+
+
+            console.log(display.innerHTML);
+
+            if (display.innerHTML === "0") {
+                display.innerHTML = input;
+                enableBtns();
+                document.getElementById("equals").disabled = false;
+            }
+
+
+            else if (input === "add" || input === "subtract" || input === "multiply" || input === "divide") {
+
+                x = display.innerHTML;
+                // result = displayresult.innerHTML;
+                switch (input) {
+                    case "add":
+                        display.innerHTML = "+";
+                        break;
+                    case "subtract":
+                        display.innerHTML = "-";
+                        break;
+                    case "multiply":
+                        display.innerHTML = "*";
+                        break;
+                    case "divide":
+                        display.innerHTML = "/";
+                        break;
+                    default: display.innerHTML = "";
+                }
+
+                document.getElementById("equals").disabled = false;
+
+                operator = input;
+                console.log('OPERATOR' + operator);
+            } else if (input === 'equals') {
+                console.log(x + display.innerHTML + operator);
+                display.innerHTML = calc(x, display.innerHTML, operator);
+                x = display.innerHTML;
+
+            }
+            else if (input >= 0) {
+                console.log('check');
+                display.innerHTML += input;
+            }
+            else {
+
+                display.innerHTML += input;
+
+                document.getElementById("equals").disabled = false;
+            }
+        }
+
+        function calc(firstnumber, secondnumber, operator) {
+            let res;
+            switch (operator) {
+                case "add":
+                    res = parseFloat(firstnumber) + parseFloat(secondnumber);
+                    // displayresult.innerHTML = x;
+                    break;
+                case "subtract":
+                    res = parseInt(firstnumber) -  parseInt(Math.abs(secondnumber));
+                    console.log("res1"+ res);
+                    // displayresult.innerHTML = x;
+                    break;
+                case "multiply":
+                    res = parseInt(firstnumber) * parseInt(secondnumber);
+                    // displayresult.innerHTML = x;
+                    break;
+                case "divide":
+                    res = parseInt(firstnumber) / parseInt(secondnumber);
+
+                    // displayresult.innerHTML = x;
+                    break;
+                default:
+                // code block
+
+            }
+            document.getElementById("equals").disabled = true;
+            return res;
+
+        }
+
+        function directEquals() {
+            switch (operator) {
+                case "add":
+                    displayresult.innerHTML = parseFloat(result) + parseFloat(x);
+                    result = displayresult.innerHTML;
+                    // displayresult.innerHTML = x;
+                    break;
+                case "subtract":
+                    displayresult.innerHTML = parseFloat(result) - parseFloat(x);
+                    result = displayresult.innerHTML;
+                    // displayresult.innerHTML = x;
+                    break;
+                case "multiply": parseInt
+                    displayresult.innerHTML = parseFloat(displayresult.innerHTML) * parseFloat(x);
+                    result = displayresult.innerHTML;
+                    // displayresult.innerHTML = x;
+                    break;
+                case "divide":
+                    displayresult.innerHTML = parseFloat(displayresult.innerHTML) / parseFloat(x);
+                    result = displayresult.innerHTML;
+                    // displayresult.innerHTML = x;
+                    break;
+                default:
+                    result = displayresult.innerHTML;
+                // code block
+            }
+            document.getElementById("equals").disabled = true;
+
+        }
+        function clears() {
+            let cleardis = document.getElementById("display");
+            let cleardis2 = document.getElementById("result");
+            x = 0;
+            result = 0;
+            cleardis.innerHTML = "0";
+            cleardis2.innerHTML = "0";
+            disAbleBtns();
+        }
+        function disAbleBtns() {
+            document.getElementById("multiply").disabled = true;
+            document.getElementById("subtract").disabled = true;
+            document.getElementById("add").disabled = true;
+            document.getElementById("divide").disabled = true;
+
+        }
+        function enableBtns() {
+            document.getElementById("multiply").disabled = false;
+            document.getElementById("subtract").disabled = false;
+            document.getElementById("add").disabled = false;
+            document.getElementById("divide").disabled = false;
+        }
+    </script> -->
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"
+        integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"
+        integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</body>
+
+</html>
